@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f47b20">
+<title>China Travel & Business Trip Quick Guide｜2026</title>
+<style>
+:root{
+  --orange:#f47b20; --orange2:#ff9d45; --orange-dark:#d9631a; --orange-tint:#fff1e5;
+  --ink:#18212b; --muted:#68727d; --muted2:#8b949d;
+  --cream:#fff8f1; --line:#ece7e1; --line-soft:#f3efea; --card:#fff; --soft:#f6f7f8;
+  --shadow-sm:0 1px 2px rgba(25,35,45,.04),0 3px 10px rgba(25,35,45,.045);
+  --shadow:0 2px 4px rgba(25,35,45,.03),0 12px 32px rgba(25,35,45,.07);
+  --shadow-lg:0 4px 10px rgba(25,35,45,.05),0 22px 50px rgba(25,35,45,.11);
+  --radius:20px; --radius-sm:14px; --radius-lg:26px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  /* 缩略图统一高度：所有图片等高排列，保证每排上下边缘对齐 */
+  --thumb-h:232px;
+}
+*{box-sizing:border-box}
+/* 修复1：禁用CSS平滑滚动，微信X5内核下smooth会导致锚点跳转失效 */
+html{
+  scroll-behavior:auto;
+  -webkit-text-size-adjust:100%;   /* 防止 iOS 横屏时自动放大正文 */
+  text-size-adjust:100%;
+}
+body{
+  margin:0;background:#e9ebee;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  -webkit-tap-highlight-color:rgba(244,123,32,.12);   /* 去掉移动端点击时的灰块闪烁 */
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:6px}
+.page{max-width:820px;margin:auto;background:#fff;overflow:hidden;box-shadow:0 0 60px rgba(25,35,45,.07)}
+/* 卡片与滚动条都要能收缩，否则会被内部定宽内容撑破栅格 */
+.card,.img-scroll,.steps,.table-wrap{min-width:0}
+.hero{
+  /* svh 用当前可见高度，避免移动端地址栏收起/展开时 hero 高度跳动；
+     不支持 svh 的内核回退到上一行的 vh */
+  min-height:88vh;
+  min-height:88svh;
+  padding:calc(28px + env(safe-area-inset-top)) 24px 44px;
+  position:relative;overflow:hidden;background:
+ radial-gradient(circle at 88% 8%,rgba(255,255,255,.8) 0 4%,transparent 5%),
+ linear-gradient(145deg,#fff8f1 0%,#fff 52%,#f7f8f9 100%);}
+.topbar{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#737b83;letter-spacing:.06em;position:relative;z-index:2}
+.logo{font-weight:800;letter-spacing:.1em;color:var(--orange)}
+.hero-main{padding-top:13vh;position:relative;z-index:2}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.75);border:1px solid #ffe0bd;
+  color:var(--orange-dark);font-size:11px;font-weight:800;letter-spacing:.08em;
+  padding:6px 13px;border-radius:999px;margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(244,123,32,.08);
+}
+.hero-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1{
+  font-size:clamp(28px, 5.6vw, 50px);
+  line-height:1.12;
+  margin:0 0 18px;
+  letter-spacing:-.035em;
+  white-space: normal;
+  word-break: keep-all;
+  font-weight: 800;
+  max-width:14em;
+}
+.hero-cn{font-size:clamp(21px,4.6vw,30px);font-weight:750;margin:0 0 24px;color:#3b4652;letter-spacing:-.01em}
+.hero-rule{width:56px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--orange),var(--orange2));margin:0 0 24px}
+.lead-wrap{max-width:600px;}
+.lead-en{font-size:15px;color:var(--muted);margin:0 0 10px;line-height:1.65;}
+.lead-cn{font-size:14.5px;color:var(--muted2);margin:0;line-height:1.7;}
+/* Hero 底部统计条 */
+.hero-stats{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat b{font-size:22px;font-weight:850;color:var(--orange);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero-stat span{font-size:11px;color:var(--muted2);letter-spacing:.04em}
+/* ===== 动画基础：滚动入场 ===== */
+.animate-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+.animate-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+h1 { transition-delay: 0.15s; }
+.hero-cn { transition-delay: 0.3s; }
+.lead-wrap { transition-delay: 0.45s; }
+.scroll { transition-delay: 0.6s; }
+.section .kicker { transition-delay: 0.05s; }
+.section .cn-title { transition-delay: 0.15s; }
+/* ===== Hero 背景光晕浮动呼吸 ===== */
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.13; }
+  50% { transform: translateY(-12px) scale(1.05); opacity: 0.18; }
+}
+.hero-orb{
+  position:absolute;right:-90px;bottom:8%;width:280px;height:280px;border-radius:50%;
+  background:linear-gradient(135deg,#ffb36d,#f47b20);
+  filter:blur(3px);
+  animation: float-orb 8s ease-in-out infinite;
+  z-index:1;
+}
+.hero-orb.orb2{
+  right:auto;left:-120px;bottom:auto;top:16%;width:200px;height:200px;
+  background:linear-gradient(135deg,#ffd9b0,#ffa657);
+  animation-duration:11s;animation-direction:reverse;
+}
+/* ===== 滚动引导按钮弹跳 ===== */
+@keyframes bounce-scroll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.scroll{
+  margin-top:52px;display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,var(--orange),#ff9440);
+  padding:13px 24px;border-radius:999px;
+  box-shadow:0 8px 24px rgba(244,123,32,.28);
+  animation: bounce-scroll 2s ease-in-out infinite;
+  transition:box-shadow .25s ease;
+}
+.scroll:hover{box-shadow:0 12px 30px rgba(244,123,32,.4)}
+.section{padding:64px 24px;position:relative}
+.section.alt{background:linear-gradient(180deg,#faf9f8 0%,#f7f8f9 100%);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+/* 章节标题：加一条橙色短标尺，强化层级 */
+.kicker{
+  font-size:13px;color:var(--orange);font-weight:850;letter-spacing:.1em;
+  text-transform:uppercase;margin:0 0 10px 0;
+  display:flex;align-items:center;gap:10px;
+}
+.kicker::before{content:"";width:22px;height:3px;border-radius:999px;background:var(--orange);flex:0 0 22px}
+.cn-title{font-size:25px;font-weight:800;margin:0 0 28px;color:var(--ink);letter-spacing:-.025em;line-height:1.3}
+.title{display:none;}
+.grid{display:grid;gap:14px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm);
+  transition: transform 0.25s var(--ease),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+  display: block;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: #ffd3b0;
+}
+/*===== 可跳转卡片右侧箭头（和目录toc‑card‑arrow统一风格）=====*/
+.card-link{
+  position:relative;
+  padding-right:40px;
+}
+.card-link::after{
+  content:"→";
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--orange);
+  font-size:18px;
+  font-style:normal;
+  transition:transform 0.2s ease;
+  pointer-events:none;
+}
+.card-link:hover::after{
+  transform:translateY(-50%) translateX(4px);
+}
+.num{width:32px;height:32px;border-radius:11px;background:var(--orange-tint);color:var(--orange);display:grid;place-items:center;font-weight:850;font-size:12px;margin-bottom:14px}
+.en{font-size:16px;font-weight:800;line-height:1.35;letter-spacing:-.01em}
+.cn{font-size:13px;color:var(--muted);margin-top:4px}
+.small{font-size:13.5px;color:var(--muted);line-height:1.65}
+.card .small{margin:10px 0 0}
+.card > .grid{margin-top:16px}
+/* 提示条：左侧橙色竖线 + 柔和底色 */
+.warn{
+  background:linear-gradient(180deg,#fff8ef,#fff5e9);
+  border:1px solid #ffe4c6;border-left:3px solid var(--orange2);
+  border-radius:var(--radius-sm);padding:15px 17px;margin-top:20px;
+  font-size:13px;line-height:1.7;color:#5c5347;
+}
+/* ===== 横向滚动条：细而可见，作为“可横向滑动”的视觉提示 ===== */
+.steps,.img-scroll{
+  scrollbar-width:thin;scrollbar-color:#dcd7d1 transparent;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+.steps::-webkit-scrollbar,.img-scroll::-webkit-scrollbar{height:6px}
+.steps::-webkit-scrollbar-track,.img-scroll::-webkit-scrollbar-track{background:transparent}
+.steps::-webkit-scrollbar-thumb,.img-scroll::-webkit-scrollbar-thumb{background:#dcd7d1;border-radius:999px}
+.steps::-webkit-scrollbar-thumb:hover,.img-scroll::-webkit-scrollbar-thumb:hover{background:#c6c0b9}
+.steps{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding-bottom:10px;margin-top:14px}
+/* 步骤卡等宽 + 纵向弹性，使卡内图片起始位置一致 */
+.step{
+  flex:0 0 178px;width:178px;
+  display:flex;flex-direction:column;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:15px;
+  scroll-snap-align:start;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.step:hover {
+  border-color: var(--orange2);
+  transform: translateY(-2px);
+  box-shadow:0 8px 20px rgba(25,35,45,.07);
+}
+.step b{
+  display:inline-block;font-size:10px;font-weight:850;letter-spacing:.08em;
+  color:var(--orange);background:var(--orange-tint);
+  padding:4px 9px;border-radius:999px;margin-bottom:11px;align-self:flex-start;
+}
+.step .en{font-size:14px}
+.step .cn{font-size:12px}
+.timeline{position:relative;margin-top:20px}
+.timeline:before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--orange2),var(--line))}
+.titem{position:relative;padding:0 0 22px 38px}
+.titem:last-child{padding-bottom:4px}
+.dot{position:absolute;left:4px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 5px #fff2e8}
+.titem .en{font-size:15px}.titem .cn{font-size:12px}
+/* ===== 问答折叠 ===== */
+.qa{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+.q{padding:17px 18px;border-bottom:1px solid var(--line-soft);cursor:pointer;transition:background .18s ease}
+.q:last-child{border-bottom:0}
+.q:hover{background:#fdfbf9}
+.q.open{background:#fffaf4}
+.qhead{display:flex;justify-content:space-between;gap:12px;font-weight:750;font-size:14.5px;align-items:flex-start}
+.plus{
+  color:var(--orange);font-size:20px;line-height:1;transition:transform .22s var(--ease);
+  flex:0 0 22px;width:22px;height:22px;display:grid;place-items:center;
+  background:var(--orange-tint);border-radius:8px;font-weight:600;
+}
+/* 修复3：问答改用display切换，代替max-height过渡动画（微信X5下transition异常导致无法展开） */
+.answer{
+  display:none;
+  color:var(--muted);font-size:13px;padding-right:24px;
+}
+.q.open .answer{
+  display:block;
+  margin-top:10px;
+  padding-top: 4px;
+}
+.q.open .plus{transform:rotate(45deg)}
+/* ===== 表格 ===== */
+.table-wrap{
+  overflow:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;
+  box-shadow:var(--shadow-sm);
+  scrollbar-width:thin;scrollbar-color:#dcd7d1 transparent;
+}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{background:#dcd7d1;border-radius:999px}
+table{border-collapse:collapse;width:100%;min-width:720px;background:#fff;font-size:12.5px}
+th,td{padding:14px 14px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top}
+/* 表格横滑提示：桌面端表格能放下时不显示 */
+.swipe-hint{display:none}
+@media(max-width:760px){
+  .swipe-hint{
+    display:flex;align-items:center;gap:6px;
+    font-size:12px;color:var(--muted2);margin:0 0 8px;
+  }
+  .swipe-hint::before{content:"↔";color:var(--orange);font-weight:800;font-size:14px}
+}
+th{
+  background:#faf7f3;color:#59636e;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  font-weight:800;white-space:nowrap;
+}
+tbody tr:nth-child(even){background:#fcfbfa}
+tbody tr:hover{background:#fff8f0}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:750;color:var(--ink);white-space:nowrap}
+/* ===== 紧急电话 ===== */
+.emergency{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.em{
+  background:linear-gradient(160deg,#232a32,#15191e);color:#fff;
+  border-radius:var(--radius-sm);padding:18px 8px;text-align:center;
+  border:1px solid rgba(255,255,255,.06);
+  transition:transform .22s var(--ease), box-shadow .22s ease;
+}
+.em:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(23,27,32,.25)}
+.em strong{font-size:26px;display:block;font-variant-numeric:tabular-nums;letter-spacing:.02em;font-weight:850;color:#ffb877}
+.em span{font-size:11px;color:#c9cdd2;display:block;margin-top:5px}
+/* ===== 酒店卡片 ===== */
+.hotel-card{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.badge{
+  display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.07em;
+  padding:5px 10px;border-radius:999px;background:var(--orange-tint);color:var(--orange-dark);
+  white-space:nowrap;flex:0 0 auto;
+}
+/* ===== 页脚 ===== */
+.footer{
+  padding:54px 24px calc(78px + env(safe-area-inset-bottom));
+  text-align:center;color:#fff;
+  background:radial-gradient(circle at 50% 0%,#2a323b 0%,#171b20 60%);
+}
+.footer .en{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.footer .cn{color:#aeb4bb;margin-top:6px}
+.footer-rule{width:44px;height:3px;border-radius:999px;background:var(--orange);margin:0 auto 24px}
+/* 修复1：悬浮按钮提升层级，确保微信端不被遮挡可点击 */
+/* safe-area：iPhone 底部小横条区域不放可点内容 */
+.float-nav{
+  position:fixed;right:16px;z-index:999;display:flex;gap:8px;
+  bottom:calc(18px + env(safe-area-inset-bottom));
+}
+.float-nav button{
+  border:0;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 8px 25px rgba(0,0,0,.14);font-size:18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.float-nav button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+.float-nav button:active{transform:scale(.92)}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--orange);z-index:99;width:0}
+/*===== 规整双列目录 =====*/
+.toc-section {
+  background: linear-gradient(180deg, #fff 0%, #fffaf5 100%);
+  padding-top: 48px;
+}
+.toc-header {
+  margin-bottom: 28px;
+}
+.toc-masonry {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.toc-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.25s ease, 
+              border-color 0.25s ease;
+  text-decoration: none;
+  transform: translateY(0);
+}
+.toc-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange2);
+  box-shadow: 0 10px 28px rgba(244, 123, 32, 0.15);
+}
+.toc-card-num {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: #fff1e5;
+  color: var(--orange);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 850;
+  transition: all 0.25s ease;
+}
+.toc-card:hover .toc-card-num {
+  background: var(--orange);
+  color: #fff;
+}
+.toc-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.toc-card-en {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.toc-card-cn {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.toc-card-arrow {
+  flex: 0 0 18px;
+  color: var(--orange);
+  font-size: 18px;
+  font-style: normal;
+  transition: transform 0.2s ease;
+}
+.toc-card:hover .toc-card-arrow {
+  transform: translateX(4px);
+}
+/* 修复1：悬浮目录按钮提升层级 */
+.contents-float {
+  position: fixed;
+  right: 16px;
+  bottom: calc(74px + env(safe-area-inset-bottom));
+  z-index: 999;
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  padding: 0 18px;
+  min-height: 44px;          /* 触屏最小点击尺寸 */
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(244, 123, 32, 0.22);
+  opacity: 0.95;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contents-float:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 28px rgba(244, 123, 32, 0.3);
+}
+.contents-float:active{transform:scale(.94)}
+/* ===== 入境中国：公路前进动态流程 ===== */
+.entry-road-wrapper {
+  padding: 18px 0;
+  position: relative;
+  overflow: hidden;
+}
+.entry-road-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 8px;
+}
+/* 修复2：流程图连接线默认展开，不依赖IntersectionObserver（微信X5下Observer不触发会导致永远不可见） */
+.entry-road-line {
+  position: absolute;
+  left: 8%;
+  top: 24px;
+  width: 84%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--orange2) 100%);
+  border-radius: 2px;
+  z-index: 1;
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+.entry-road-line.visible {
+  transform: scaleX(1);
+}
+/* 修复2：流程步骤默认可见，不依赖Observer触发才显示 */
+.entry-road-step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.entry-road-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.entry-road-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 12px rgba(25, 35, 45, 0.06);
+}
+.entry-road-step.visible .entry-road-icon {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(244, 123, 32, 0.08);
+}
+.entry-road-en {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.entry-road-cn {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.45;
+}
+.entry-road-step:hover .entry-road-icon {
+  transform: scale(1.08) translateY(-2px);
+  border-color: var(--orange2);
+}
+@media(max-width:520px){
+  /* 必须是 minmax(0,1fr) 而非 1fr：
+     1fr 等价 minmax(auto,1fr)，auto 最小值会被卡片内横向图片条的总宽撑开，
+     卡片会变成 870px 宽再被 .page 的 overflow:hidden 裁掉，右侧图片永久不可见。 */
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .hero{
+    min-height:82vh;
+    min-height:82svh;
+    padding:calc(24px + env(safe-area-inset-top)) 18px 38px;
+  }
+  .section{padding:52px 18px}
+  .emergency{grid-template-columns:repeat(2,1fr)}
+  .kicker{font-size:12px;}
+  .cn-title{font-size:21px;margin-bottom:22px}
+  .hero-stats{gap:18px 22px;margin-top:28px}
+  .hero-stat b{font-size:19px}
+  .badge{font-size:10.5px;padding:5px 9px}
+  .toc-masonry {
+    grid-template-columns: 1fr;
+  }
+  .toc-card-en {
+    font-size: 16px;
+  }
+  .animate-in {
+    transform: translateY(16px);
+  }
+  .card-link{
+    padding-right:32px;
+  }
+  .card-link::after{
+    right:12px;
+  }
+  /* 入境流程：移动端竖向 */
+  .entry-road-track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 6px;
+  }
+  .entry-road-line {
+    left: 23px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--orange) 0%, var(--orange2) 100%);
+    transform-origin: top center;
+    transform: scaleY(1);
+  }
+  .entry-road-line.visible {
+    transform: scaleY(1);
+  }
+  .entry-road-step {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+  .entry-road-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    margin-bottom: 0;
+    flex: 0 0 44px;
+  }
+  .entry-road-text {
+    flex: 1;
+  }
+}
+section[id]{scroll-margin-top:12px}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   嵌入图片：统一高度实现对齐
+   原方案固定宽度 160px、高度自由，而素材宽高比从 0.56 到 1.96，
+   导致同一排图片高度相差 3 倍以上。改为固定高度、宽度自适应：
+   每排图片上下边缘严格对齐，且不裁剪、不拉伸任何截图。
+   ========================================================= */
+.img-scroll{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:14px 0 10px;
+}
+.img-scroll img{
+  height:var(--thumb-h);
+  width:auto;
+  max-width:none;          /* 覆盖全局 img{max-width:100%}，否则窄屏下横图会被压变形 */
+  flex:0 0 auto;
+  scroll-snap-align:start;
+}
+/* 步骤卡内图片：margin-top:auto 把图片压到卡片底部，
+   卡片等高拉伸后，一排图片的底边自然对齐 */
+.step .step-img{
+  width:100%;
+  height:186px;
+  object-fit:contain;
+  object-position:center top;
+  margin-top:auto;
+  padding-top:0;
+}
+.hotel-img{
+  width:100%;
+  max-width:600px;         /* 原图 600px 宽，放大显示会发虚 */
+  margin:14px auto 4px;
+}
+/* 可点击放大的图片统一外观 */
+.img-scroll img,
+.step .step-img,
+.hotel-img{
+  display:block;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--soft);
+  cursor:zoom-in;
+  transition:transform .25s var(--ease), box-shadow .25s ease, border-color .25s ease;
+}
+.img-scroll img:hover,
+.step .step-img:hover,
+.hotel-img:hover{
+  border-color:var(--orange2);
+  box-shadow:0 12px 28px rgba(25,35,45,.16);
+  transform:translateY(-2px);
+}
+.img-scroll img:active,
+.step .step-img:active,
+.hotel-img:active{transform:translateY(0) scale(.99)}
+/* 「点击放大」提示 */
+.img-hint{
+  display:flex;align-items:center;gap:6px;
+  font-size:11.5px;color:var(--muted2);
+  margin:0 0 2px;letter-spacing:.01em;
+}
+.img-hint::before{
+  content:"⤢";
+  font-size:12px;color:var(--orange);font-weight:700;
+}
+@media(max-width:520px){
+  :root{--thumb-h:196px}
+  .step .step-img{height:160px}
+}
+
+/* =========================================================
+   灯箱：点击任意图片全屏放大
+   用 display 切换而非仅靠 opacity/transition，
+   与本页其他微信 X5 兼容处理保持一致。
+   ========================================================= */
+@keyframes lb-fade-in{from{opacity:0}to{opacity:1}}
+.lb{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  z-index:9999;
+  display:none;
+  background:rgba(11,14,17,.95);
+  -webkit-tap-highlight-color:transparent;
+}
+.lb.open{display:block;animation:lb-fade-in .2s ease}
+.lb-stage{
+  /* bottom 必须留够 .lb-bottom 的实际高度（说明+按钮+提示+内边距），否则大图会压住说明文字 */
+  position:absolute;top:54px;left:0;right:0;bottom:132px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 16px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;   /* 放大后滑到边缘不要把底层页面带着滚 */
+}
+.lb-img{
+  max-width:100%;max-height:100%;
+  display:block;margin:auto;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+  cursor:zoom-in;
+}
+/* 二次放大：切到 block 布局后由容器原生滚动，兼容性最好。
+   实际放大倍数由 JS 按图片原始分辨率计算，避免糊成马赛克。 */
+.lb-stage.zoomed{display:block;padding:16px;text-align:center}
+.lb-stage.zoomed .lb-img{
+  max-width:none;max-height:none;
+  cursor:zoom-out;
+  margin:0 auto;
+}
+.lb-top{
+  position:absolute;top:0;left:0;right:0;
+  height:calc(54px + env(safe-area-inset-top));
+  padding:env(safe-area-inset-top) 14px 0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.lb-count{
+  font-size:13px;font-weight:750;color:#e6e8ea;
+  font-variant-numeric:tabular-nums;letter-spacing:.05em;
+}
+.lb-btn{
+  border:0;background:rgba(255,255,255,.13);color:#fff;
+  width:38px;height:38px;border-radius:50%;
+  font-size:17px;line-height:1;padding:0;
+  cursor:pointer;display:grid;place-items:center;
+  transition:background .18s ease, transform .18s ease;
+}
+.lb-btn:hover{background:rgba(255,255,255,.26)}
+.lb-btn:active{transform:scale(.93)}
+.lb-btn[disabled]{opacity:.3;cursor:default}
+.lb-bottom{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:14px 14px calc(20px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  background:linear-gradient(180deg,rgba(11,14,17,0),rgba(11,14,17,.9) 45%);
+}
+.lb-caption{
+  color:#d2d6da;font-size:13px;font-weight:650;text-align:center;
+  min-height:18px;padding:0 8px;
+}
+.lb-nav{display:flex;align-items:center;gap:12px}
+.lb-nav .lb-btn{width:44px;height:44px;font-size:19px}
+.lb-hint{color:#767e86;font-size:11px;text-align:center}
+body.lb-lock{overflow:hidden}
+@media(max-width:520px){
+  .lb-stage{
+    top:calc(52px + env(safe-area-inset-top));
+    bottom:calc(112px + env(safe-area-inset-bottom));
+    padding:0 10px;
+  }
+  .lb-hint{display:none}          /* 手机上没有键盘，提示无意义 */
+  .lb-top .lb-btn{width:44px;height:44px;font-size:18px}
+  .lb-caption{font-size:12.5px}
+}
+
+/* =========================================================
+   触屏设备：关掉悬停态
+   iOS / Android 上 :hover 会在点击后残留，卡片会一直停在“抬起”状态
+   直到点击别处。这里把抬起效果还原成各自的静态值，并改用 :active 做
+   即时按压反馈。
+   ========================================================= */
+@media (hover:none){
+  .card:hover{
+    transform:none;
+    box-shadow:var(--shadow-sm);
+    border-color:var(--line);
+  }
+  .step:hover{
+    transform:none;
+    box-shadow:none;
+    border-color:var(--line);
+  }
+  .toc-card:hover{
+    transform:none;
+    box-shadow:var(--shadow);
+    border-color:var(--line);
+  }
+  .toc-card:hover .toc-card-num{background:var(--orange-tint);color:var(--orange)}
+  .toc-card:hover .toc-card-arrow{transform:none}
+  .card-link:hover::after{transform:translateY(-50%)}
+  .em:hover{transform:none;box-shadow:none}
+  /* 只还原位移；边框色交给 .visible 状态自己决定，不在这里假设 JS 已执行 */
+  .entry-road-step:hover .entry-road-icon{transform:none}
+  .img-scroll img:hover,
+  .step .step-img:hover,
+  .hotel-img:hover{
+    transform:none;
+    box-shadow:none;
+    border-color:var(--line);
+  }
+  .scroll:hover{box-shadow:0 8px 24px rgba(244,123,32,.28)}
+  .float-nav button:hover{transform:none;box-shadow:0 8px 25px rgba(0,0,0,.14)}
+  .contents-float:hover{transform:none;box-shadow:0 8px 24px rgba(244,123,32,.22)}
+  tbody tr:hover{background:transparent}
+  tbody tr:nth-child(even):hover{background:#fcfbfa}
+  /* 按压反馈 */
+  a.card:active,.toc-card:active{transform:scale(.985)}
+  .q:active{background:#fdfbf9}
+}
+
+/* =========================================================
+   手机上收窄舱位对比表，压缩需要横滑的距离。
+   必须放在基础表格规则之后：th 和 td:first-child 的 nowrap
+   在前面已声明，同特异性下靠后者生效。
+   ========================================================= */
+@media(max-width:760px){
+  table{min-width:540px;font-size:12px}
+  th,td{padding:11px 10px}
+  th{white-space:normal}
+  td:first-child{white-space:normal}
+}
+
+/* 手机上徽标改为独占一行，避免把酒店名挤成两行 */
+@media(max-width:520px){
+  .hotel-card{flex-direction:column-reverse;align-items:flex-start;gap:10px}
+  .hotel-card .badge{align-self:flex-start}
+}
+
+/* =========================================================
+   小屏手机（≤400px）：再收一档间距与字号
+   ========================================================= */
+@media(max-width:400px){
+  :root{--thumb-h:184px; --radius:18px; --radius-sm:13px}
+  .section{padding:46px 15px}
+  .hero{padding:calc(22px + env(safe-area-inset-top)) 15px 34px}
+  .cn-title{font-size:19.5px;margin-bottom:20px}
+  h1{letter-spacing:-.03em}
+  .lead-en,.lead-cn{font-size:14px}
+  .hero-stats{gap:14px 16px}
+  .hero-stat b{font-size:18px}
+  .hero-stat span{font-size:10.5px;letter-spacing:.01em}
+  .card{padding:17px}
+  .step{flex:0 0 162px;width:162px}
+  .step .step-img{height:148px}
+  .em{padding:15px 6px}
+  .em strong{font-size:23px}
+  .em span{font-size:10px}
+  .toc-card{padding:16px 14px;gap:10px}
+  .toc-card-en{font-size:15px}
+  .warn{padding:13px 14px;font-size:12.5px}
+  .qhead{font-size:14px}
+  .contents-float{padding:0 15px;font-size:12.5px}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main class="page">
+<section class="hero" id="top">
+  <div class="topbar"><div class="logo">FWH · TRAVEL GUIDE</div><div>2026 EDITION</div></div>
+  <div class="hero-main">
+    <div class="hero-eyebrow">BILINGUAL · 中英双语</div>
+    <h1>China Travel &amp; Business Trip Quick Guide</h1>
+    <div class="hero-cn">境外员工来华商务出行指南</div>
+    <div class="hero-rule"></div>
+    <div class="lead-wrap">
+      <p class="lead-en">A complete operational guide for foreign staff traveling to China — from pre‑departure to daily life on the ground.</p>
+      <p class="lead-cn">从出发前准备，到入境、支付、交通、酒店与紧急联系方式，一页掌握来华商务出行所需信息。</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>12</b><span>SECTIONS · 章节</span></div>
+      <div class="hero-stat"><b>25</b><span>SCREENSHOTS · 操作图</span></div>
+      <div class="hero-stat"><b>4</b><span>EMERGENCY · 紧急电话</span></div>
+    </div>
+    <a class="scroll" href="#before">Explore the guide · 开始阅读 ↓</a>
+  </div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb orb2"></div>
+</section>
+<section class="section toc-section" id="contents">
+  <div class="toc-header">
+    <div class="kicker">QUICK ACCESS</div>
+    <div class="cn-title">快速目录｜点击直达</div>
+  </div>
+  <div class="toc-masonry">
+    <a class="toc-card" href="#before">
+      <div class="toc-card-num">01</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Before You Travel</div>
+        <div class="toc-card-cn">出发前｜5项必须确认</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#entry">
+      <div class="toc-card-num">02</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Entering China</div>
+        <div class="toc-card-cn">入境中国</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#payment">
+      <div class="toc-card-num">03</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Payment in China</div>
+        <div class="toc-card-cn">在中国｜支付方式</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#setup">
+      <div class="toc-card-num">04</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Set Up Mobile Payment</div>
+        <div class="toc-card-cn">如何使用支付宝 & 微信支付</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#qa">
+      <div class="toc-card-num">05</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Payment Q&A</div>
+        <div class="toc-card-cn">支付问答 + 快速操作</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#flight">
+      <div class="toc-card-num">06</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Flights & Hotels</div>
+        <div class="toc-card-cn">机票 & 酒店预订</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#around">
+      <div class="toc-card-num">07</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Getting Around</div>
+        <div class="toc-card-cn">打车 & 导航</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#rail">
+      <div class="toc-card-num">08</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Travel Between Cities</div>
+        <div class="toc-card-cn">城市间出行｜高铁</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#stay">
+      <div class="toc-card-num">09</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Stay Comfortable</div>
+        <div class="toc-card-cn">酒店 & 日常生活</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#save">
+      <div class="toc-card-num">10</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Save Before You Travel</div>
+        <div class="toc-card-cn">手机备用资料 & 紧急联系方式</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#cabin">
+      <div class="toc-card-num">11</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Flight Cabin Comparison</div>
+        <div class="toc-card-cn">飞机四个舱位对比</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+    <a class="toc-card" href="#hotels">
+      <div class="toc-card-num">12</div>
+      <div class="toc-card-content">
+        <div class="toc-card-en">Recommended Hotels in Shenzhen</div>
+        <div class="toc-card-cn">深圳适合外籍酒店推荐</div>
+      </div>
+      <i class="toc-card-arrow">→</i>
+    </a>
+  </div>
+</section>
+<section class="section" id="before">
+  <div class="kicker">01 · Before You Travel</div>
+  <div class="cn-title">出发前｜5项必须确认</div>
+  <div class="grid grid2">
+    <div class="card"><div class="num">01</div><div class="en">Passport & Visa</div><div class="cn">护照 & 签证</div><p class="small">Confirm validity and China visa / visa‑free status before booking anything.</p></div>
+    <div class="card"><div class="num">02</div><div class="en">Flight & Hotel</div><div class="cn">机票 & 酒店</div><p class="small">Save booking confirmations; verify hotel accepts foreign passports.</p></div>
+    <div class="card"><div class="num">03</div><div class="en">Mobile Network</div><div class="cn">手机网络</div><p class="small">Activate international roaming or prepare China SIM / eSIM before departure.</p></div>
+    <div class="card"><div class="num">04</div><div class="en">Payment</div><div class="cn">支付</div><p class="small">Pre‑register Alipay + WeChat Pay with Visa/Mastercard; carry some RMB cash as backup.</p></div>
+    <div class="card" style="grid-column:1/-1"><div class="num">05</div><div class="en">Essential Apps</div><div class="cn">必备 App</div><p class="small">Amap / Didi / Trip.com / Translation Tool — download and test before you fly.</p></div>
+  </div>
+</section>
+<section class="section alt" id="entry">
+  <div class="kicker">02 · Entering China</div>
+  <div class="cn-title">入境中国｜五步流程</div>
+  <div class="entry-road-wrapper">
+    <div class="entry-road-track">
+      <div class="entry-road-line"></div>
+      <div class="entry-road-step">
+        <div class="entry-road-icon">📋</div>
+        <div class="entry-road-text">
+          <div class="entry-road-en">Prepare Documents</div>
+          <div class="entry-road-cn">准备证件材料</div>
+        </div>
+      </div>
+      <div class="entry-road-step">
+        <div class="entry-road-icon">✈️</div>
+        <div class="entry-road-text">
+          <div class="entry-road-en">Arrive at Airport</div>
+          <div class="entry-road-cn">抵达机场</div>
+        </div>
+      </div>
+      <div class="entry-road-step">
+        <div class="entry-road-icon">🛂</div>
+        <div class="entry-road-text">
+          <div class="entry-road-en">Immigration</div>
+          <div class="entry-road-cn">入境检查</div>
+        </div>
+      </div>
+      <div class="entry-road-step">
+        <div class="entry-road-icon">🧳</div>
+        <div class="entry-road-text">
+          <div class="entry-road-en">Baggage Claim</div>
+          <div class="entry-road-cn">提取行李</div>
+        </div>
+      </div>
+      <div class="entry-road-step">
+        <div class="entry-road-icon">🚗</div>
+        <div class="entry-road-text">
+          <div class="entry-road-en">Exit & Transfer</div>
+          <div class="entry-road-cn">离开机场 / 前往目的地</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ Entry and visa policies may change. Please check the latest official requirements before departure.<br>入境及签证政策可能变化，请在出发前确认最新官方要求。</div>
+</section>
+<section class="section" id="payment">
+  <div class="kicker">03 · Payment in China</div>
+  <div class="cn-title">在中国｜支付方式</div>
+  <div class="grid grid2">
+    <a class="card card-link" href="https://www.alipay.com/download" target="_blank" rel="noopener noreferrer">
+      <div class="en">🔵 Alipay · 支付宝</div>
+      <p class="small">Most widely accepted across China. Links to international Visa/Mastercard seamlessly.</p>
+    </a>
+    <!-- 修改微信卡片跳转链接为微信官网 https://weixin.qq.com -->
+    <a class="card card-link" href="https://weixin.qq.com" target="_blank" rel="noopener noreferrer">
+      <div class="en">🟢 WeChat Pay · 微信支付</div>
+      <p class="small">Essential for the WeChat ecosystem. Supports foreign cards and is accepted nearly everywhere.</p>
+    </a>
+    <div class="card"><div class="en">💳 Visa / Mastercard</div><p class="small">Accepted at major hotels and international retailers.</p></div>
+    <div class="card"><div class="en">💵 RMB Cash</div><p class="small">Useful in markets, small restaurants, and rural areas.</p></div>
+  </div>
+  <div class="warn">💡 Most merchants in China accept mobile payment. Set up Alipay and WeChat Pay before arrival for seamless transactions.<br>多数商户支持移动支付，建议抵达前完成支付宝与微信支付设置。</div>
+</section>
+<section class="section alt" id="setup">
+  <div class="kicker">04 · Set Up Mobile Payment</div>
+  <div class="cn-title">如何使用支付宝 & 微信支付</div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="en">🔵 Alipay｜支付宝</div>
+    <p class="img-hint">Tap any screenshot to enlarge · 点击截图可放大查看</p>
+    <div class="steps">
+      <div class="step"><b>STEP 01</b><div class="en">Download & Register</div><div class="cn">下载并注册账号</div><img class="step-img" src="images/img-01.jpg" alt="Alipay Step 1"></div>
+      <div class="step"><b>STEP 02</b><div class="en">Real‑Name Auth</div><div class="cn">实名认证</div><img class="step-img" src="images/img-02.jpg" alt="Alipay Step 2"></div>
+      <div class="step"><b>STEP 03</b><div class="en">Link Int'l Card</div><div class="cn">绑定国际银行卡</div><img class="step-img" src="images/img-03.jpg" alt="Alipay Step 3"></div>
+      <div class="step"><b>STEP 04</b><div class="en">Verify & Pay</div><div class="cn">验证并完成支付</div><img class="step-img" src="images/img-04.jpg" alt="Alipay Step 4"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="en">🟢 WeChat Pay｜微信支付</div>
+    <p class="img-hint">Tap any screenshot to enlarge · 点击截图可放大查看</p>
+    <div class="steps">
+      <div class="step"><b>STEP 01</b><div class="en">Download & Register</div><div class="cn">下载并注册账号</div><img class="step-img" src="images/img-05.jpg" alt="WeChat Pay Step 1"></div>
+      <div class="step"><b>STEP 02</b><div class="en">Real‑Name Auth</div><div class="cn">实名认证</div><img class="step-img" src="images/img-06.jpg" alt="WeChat Pay Step 2"></div>
+      <div class="step"><b>STEP 03</b><div class="en">Link Int'l Card</div><div class="cn">绑定国际银行卡</div><img class="step-img" src="images/img-07.jpg" alt="WeChat Pay Step 3"></div>
+      <div class="step"><b>STEP 04</b><div class="en">Verify & Pay</div><div class="cn">验证并完成支付</div><img class="step-img" src="images/img-08.jpg" alt="WeChat Pay Step 4"></div>
+    </div>
+  </div>
+</section>
+<section class="section" id="qa">
+  <div class="kicker">05 · Payment Q&A</div>
+  <div class="cn-title">支付问答 + 快速操作</div>
+  <div class="qa">
+    <div class="q"><div class="qhead"><span>Q1: Can I use my foreign Visa / Mastercard?</span><span class="plus">+</span></div><div class="answer">Yes. Both Alipay and WeChat Pay support international Visa and Mastercard. Link your card during setup and you can pay immediately.</div></div>
+    <div class="q"><div class="qhead"><span>Q2: Do I need RMB cash?</span><span class="plus">+</span></div><div class="answer">Keep cash as a backup. Most places accept mobile payment, but cash is useful for small vendors and rural areas.</div></div>
+    <div class="q"><div class="qhead"><span>Q3: What if my card cannot be linked?</span><span class="plus">+</span></div><div class="answer">Contact your bank to enable international transactions. Some banks require travel notification. Alternatively, use a different card or withdraw cash at an ATM.</div></div>
+    <div class="q"><div class="qhead"><span>Q4: Which payment app should I use?</span><span class="plus">+</span></div><div class="answer">Both Alipay and WeChat Pay are widely accepted. Use WeChat Pay if you rely on WeChat for communication.</div></div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <div class="en">⚡ How to Pay in 4 Steps</div>
+    <div class="timeline">
+      <div class="titem"><i class="dot"></i><div class="en">Open App</div><div class="cn">打开 App</div></div>
+      <div class="titem"><i class="dot"></i><div class="en">Scan</div><div class="cn">扫码</div></div>
+      <div class="titem"><i class="dot"></i><div class="en">Confirm Amount</div><div class="cn">确认金额</div></div>
+      <div class="titem"><i class="dot"></i><div class="en">Pay & Verify</div><div class="cn">支付并核验</div></div>
+    </div>
+    <div class="warn">✓ Payment Complete — You'll receive an instant confirmation notification in the app.</div>
+  </div>
+</section>
+<section class="section alt" id="flight">
+  <div class="kicker">06 · Flights & Hotels</div>
+  <div class="cn-title">机票 & 酒店预订｜Trip.com</div>
+  <div class="card">
+    <p class="en">✈️ Flight Booking</p><p class="small">Search → Select Flight → Passenger Info → Payment → Confirmation</p>
+    <p class="img-hint">Tap any screenshot to enlarge · 点击截图可放大查看</p>
+    <div class="img-scroll">
+      <img src="images/img-09.jpg" alt="Flight Booking 1">
+      <img src="images/img-10.jpg" alt="Flight Booking 2">
+      <img src="images/img-11.jpg" alt="Flight Booking 3">
+    </div>
+    <p class="en">🏨 Hotel Booking</p><p class="small">Search → Select Hotel → Check Room → Guest Info → Payment → Confirmation</p>
+    <p class="img-hint">Tap to enlarge · 点击放大</p>
+    <img class="hotel-img" src="images/img-12.jpg" alt="Hotel Booking">
+    <div class="warn">💡 Trip.com supports Alipay, WeChat Pay, and international credit cards. 24/7 English customer service available.</div>
+  </div>
+</section>
+<section class="section" id="around">
+  <div class="kicker">07 · Getting Around</div>
+  <div class="cn-title">中国境内｜打车 & 导航</div>
+  <div class="grid grid2">
+    <div class="card"><div class="en">🚕 Didi Ride‑Hailing</div><div class="cn">滴滴打车</div><p class="small">Download → Register → Add Payment → Enter Destination → Confirm Driver</p>
+    <p class="img-hint">Tap to enlarge · 点击放大</p>
+    <div class="img-scroll">
+      <img src="images/img-13.jpg" alt="Didi Step 1">
+      <img src="images/img-14.jpg" alt="Didi Step 2">
+      <img src="images/img-15.jpg" alt="Didi Step 3">
+      <img src="images/img-16.jpg" alt="Didi Step 4">
+      <img src="images/img-17.jpg" alt="Didi Step 5">
+    </div></div>
+    <div class="card"><div class="en">🗺️ Amap Navigation</div><div class="cn">高德地图</div><p class="small">Download → Search Destination → View Route → Navigate</p>
+    <p class="img-hint">Tap to enlarge · 点击放大</p>
+    <div class="img-scroll">
+      <img src="images/img-18.jpg" alt="Amap Step 1">
+      <img src="images/img-19.jpg" alt="Amap Step 2">
+    </div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><div class="en">Amap · 2 Steps</div><div class="steps">
+    <div class="step"><b>01</b><div class="en">Search & Route</div><div class="cn">搜索目的地并规划路线</div></div>
+    <div class="step"><b>02</b><div class="en">Navigate</div><div class="cn">实时导航</div></div>
+  </div></div>
+  <div class="warn">💡 Save before using: Hotel Chinese name + address + phone number + map location<br>建议提前保存：酒店中文名、地址、电话及地图位置。</div>
+</section>
+<section class="section alt" id="rail">
+  <div class="kicker">08 · Travel Between Cities</div>
+  <div class="cn-title">城市间出行｜高铁</div>
+  <div class="card">
+    <div class="en">🚄 High‑Speed Rail (高铁) — Recommended</div>
+    <p class="small">Download 12306 → Register → Search → Select → Add Passenger → Payment → Confirmation</p>
+    <div class="steps">
+      <div class="step"><b>01</b><div class="en">Search Trains</div><div class="cn">搜索高铁列车</div></div>
+      <div class="step"><b>02</b><div class="en">Select Train</div><div class="cn">选择车次及座位</div></div>
+      <div class="step"><b>03</b><div class="en">Add Passenger</div><div class="cn">添加乘客信息（护照）</div></div>
+      <div class="step"><b>04</b><div class="en">Payment & Confirm</div><div class="cn">支付并确认订单</div></div>
+    </div>
+    <p class="img-hint">Tap any screenshot to enlarge · 点击截图可放大查看</p>
+    <div class="img-scroll">
+      <img src="images/img-20.jpg" alt="High-Speed Rail 1">
+      <img src="images/img-21.jpg" alt="High-Speed Rail 2">
+      <img src="images/img-22.jpg" alt="High-Speed Rail 3">
+      <img src="images/img-23.jpg" alt="High-Speed Rail 4">
+    </div>
+    <div class="warn">💡 High‑speed rail is the preferred choice for business travel — reliable, comfortable, and connects major cities efficiently. Accepts international credit cards and Alipay/WeChat Pay.</div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div class="en">🎫 Boarding Your Train</div>
+    <p class="small">Bring Passport → Arrive Early → Security Check → Find Platform → Board</p>
+    <div class="grid grid2">
+      <div><div class="en">Security & Ticket Check</div><div class="cn">安检及验票</div></div>
+      <div><div class="en">Find Platform & Board</div><div class="cn">找到站台并上车</div></div>
+    </div>
+    <p class="img-hint">Tap any screenshot to enlarge · 点击截图可放大查看</p>
+    <div class="img-scroll">
+      <img src="images/img-24.jpg" alt="Boarding 1">
+      <img src="images/img-25.jpg" alt="Boarding 2">
+    </div>
+    <div class="warn">⚠️ Passport required. Arrive 30–60 minutes early. Security screening includes luggage scan and metal detector.</div>
+  </div>
+</section>
+<section class="section" id="stay">
+  <div class="kicker">09 · Stay Comfortable</div>
+  <div class="cn-title">入住中国｜酒店 & 日常生活</div>
+  <div class="grid">
+    <div class="card"><div class="en">🏨 Hotel Check‑In</div><div class="cn">酒店入住</div><p class="small"><b>Before Booking:</b> Confirm hotel accepts foreign passport holders<br><b>At Check‑In:</b> Bring passport + hotel booking confirmation<br><b>Recommendation:</b> Choose international chains or hotels explicitly welcoming foreign guests</p></div>
+    <div class="card"><div class="en">🔌 Power & Adapters</div><div class="cn">电源与转换插头</div><p class="small">Voltage: China uses 220V / 50Hz<br>Essential: Carry a Universal Travel Adapter for all devices<br>Note: Plug standards vary by country — adapter compatibility not guaranteed<br>3C Certification: Look for the 3C mark on your device</p></div>
+    <div class="card"><div class="en">🔋 Power Banks</div><div class="cn">充电宝</div><p class="small"><b>Carry‑On Only:</b> Power banks must travel in cabin baggage — not checked luggage<br><b>Check Airline Rules:</b> Verify watt‑hour limits before packing</p></div>
+  </div>
+</section>
+<section class="section alt" id="save">
+  <div class="kicker">10 · Save Before You Travel</div>
+  <div class="cn-title">手机备用资料 & 紧急联系方式</div>
+  <div class="card">
+    <div class="en">📁 Create a “China Trip” Folder on Your Phone</div>
+    <div class="grid grid2" style="margin-top:14px">
+      <div class="cn">📄 Passport photo copy</div>
+      <div class="cn">✈️ Flight Booking confirmation</div>
+      <div class="cn">🏨 Hotel Booking confirmation</div>
+      <div class="cn">🗓 Full Itinerary with dates and cities</div>
+      <div class="cn">📞 Emergency Contacts list</div>
+      <div class="cn">🏢 Company Contact information</div>
+      <div class="cn">🏨 Hotel Chinese Name + Address + Phone</div>
+      <div class="cn">📍 Hotel map location saved offline</div>
+    </div>
+  </div>
+  <div style="margin-top:26px">
+    <div class="kicker">EMERGENCY NUMBERS</div>
+    <div class="cn-title">紧急电话</div>
+    <!-- 修复4：紧急电话直接写正确号码，不再依赖requestAnimationFrame计数动画（微信X5下动画不执行会停留在0） -->
+    <div class="emergency" id="emergency-section">
+      <div class="em"><strong class="count-num" data-target="110">110</strong><span>Police · 警察</span></div>
+      <div class="em"><strong class="count-num" data-target="120">120</strong><span>Ambulance · 救护车</span></div>
+      <div class="em"><strong class="count-num" data-target="119">119</strong><span>Fire · 消防</span></div>
+      <div class="em"><strong class="count-num" data-target="122">122</strong><span>Traffic · 交通事故</span></div>
+    </div>
+    <div class="warn">Save these numbers to your phone contacts before departure — do not rely on memory in an emergency.<br>出发前请将号码保存至手机通讯录，紧急情况下不要依赖记忆。</div>
+  </div>
+</section>
+<section class="section" id="cabin">
+  <div class="kicker">11 · Cabin Comparison</div>
+  <div class="cn-title">飞机四个舱位对比一览表</div>
+  <div class="small" style="margin-bottom:12px">Example: Cathay Pacific · Hong Kong — San Francisco route / 例：国泰航空‑香港‑旧金山航线</div>
+  <p class="swipe-hint">Swipe the table sideways · 表格可左右滑动查看完整内容</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Cabin / 舱位</th><th>Price Index</th><th>Price</th><th>Core Advantage</th><th>Comfort</th><th>Lie Flat</th></tr></thead>
+    <tbody>
+      <tr><td>💺 Economy / 经济舱</td><td>1×</td><td>¥8,000–12,000</td><td>Lowest price, many flight choices; suitable for short trips</td><td>⭐⭐</td><td>❌</td></tr>
+      <tr><td>⭐ Premium Economy / 超级经济舱</td><td>2×</td><td>¥8,000–12,000</td><td>More space and upgraded service; strong value</td><td>⭐⭐⭐</td><td>❌</td></tr>
+      <tr><td>💼 Business / 商务舱</td><td>2–5×</td><td>¥20,000–35,000</td><td>Lie‑flat seat and upgraded service; balances rest and work</td><td>⭐⭐⭐⭐⭐</td><td>✅</td></tr>
+      <tr><td>👑 First / 头等舱</td><td>3–7×+</td><td>—</td><td>Largest space, best service and privacy; some airlines offer suites</td><td>⭐⭐⭐⭐⭐+</td><td>✅</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+<section class="section alt" id="hotels">
+  <div class="kicker">12 · Shenzhen Hotels</div>
+  <div class="cn-title">深圳适合外籍酒店推荐一览表</div>
+  <div class="grid">
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/C6O2OvP88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">1 · 深圳博林天瑞喜来登</div><div class="cn">南山区留仙大道4088号 · 11 km · 驾车26min</div><p class="small">¥1,100–1,700 · English service ✓<br>Many Hong Kong and foreign guests; good hotel atmosphere and newer hardware.</p></div><span class="badge">FOREIGN GUESTS</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/ysBwp5S88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">2 · 深圳前海华侨城瑞吉酒店</div><div class="cn">宝安区兴业路1088号 · 13 km · 驾车39min</div><p class="small">¥2,000–2,500 · English service ✓<br>Classic luxury inspired by the 1904 St. Regis New York; skyline / bay views.</p></div><span class="badge">LUXURY</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/Cki8R3T88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">3 · 深圳威尼斯英迪格酒店</div><div class="cn">南山区华侨城深南大道9026号 · 18 km · 驾车31min</div><p class="small">¥1,100–3,000 · English service ✓<br>Distinctive Venice‑inspired design; near Window of the World, Happy Valley and shopping.</p></div><span class="badge">DESIGN</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/SLdo7sT88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">4 · 深圳蛇口希尔顿南海酒店</div><div class="cn">南山区望海路1177号 · 20 km · 驾车1h</div><p class="small">¥1,100–1,300 · English service ✓<br>Located in Shekou with many foreign residents; international atmosphere and convenient surroundings.</p></div><span class="badge">INTERNATIONAL</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/Y5ZfHBV88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">5 · 深圳东海朗廷酒店</div><div class="cn">福田区深南大道7888号 · 20 km · 驾车34min</div><p class="small">¥1,000–2,000 · English service ✓<br>Classic British elegance; next to a shopping center with many dining options.</p></div><span class="badge">BRITISH STYLE</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/UQrAfLX88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">6 · 深圳湾安达仕酒店</div><div class="cn">南山区科苑南路2600号 · 20 km · 驾车37min</div><p class="small">¥2,700–5,000 · English service ✓<br>Retro Nanyang‑inspired design with strong design character and Shenzhen Bay views.</p></div><span class="badge">PREMIUM</span>
+    </a>
+    <a class="card hotel-card card-link" href="https://www.trip.com/w/xxRuT2Y88W2" target="_blank" rel="noopener noreferrer">
+      <div><div class="en">7 · 深圳星河丽思卡尔顿酒店</div><div class="cn">福田区福华三路116号 · 25 km · 驾车41min</div><p class="small">¥3,000–7,000 · English service ✓<br>Strong English service, in the Futian CBD and walkable to the Convention & Exhibition Center.</p></div><span class="badge">CBD</span>
+    </a>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-rule"></div>
+  <div class="en">Travel smart. Arrive prepared.</div>
+  <div class="cn">提前准备，安心来华。</div>
+  <p class="small" style="color:#8e969f;margin-top:18px">China Travel &amp; Business Trip Quick Guide｜2026</p>
+</footer>
+</main>
+<!-- 修复1：右下角悬浮按钮改用最兼容的scrollTo(0, y)写法，不依赖behavior参数 -->
+<button class="contents-float" onclick="window.scrollTo(0, document.getElementById('contents').offsetTop)">目录</button>
+<div class="float-nav">
+  <button aria-label="Back to top" onclick="window.scrollTo(0,0)">↑</button>
+</div>
+<!-- 图片放大灯箱 -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer 图片查看器">
+  <div class="lb-top">
+    <span class="lb-count" id="lbCount">1 / 1</span>
+    <button class="lb-btn" id="lbClose" type="button" aria-label="Close 关闭">✕</button>
+  </div>
+  <div class="lb-stage" id="lbStage">
+    <img class="lb-img" id="lbImg" src="" alt="">
+  </div>
+  <div class="lb-bottom">
+    <div class="lb-caption" id="lbCaption"></div>
+    <div class="lb-nav">
+      <button class="lb-btn" id="lbPrev" type="button" aria-label="Previous 上一张">‹</button>
+      <button class="lb-btn" id="lbZoom" type="button" aria-label="Zoom 放大">⤢</button>
+      <button class="lb-btn" id="lbNext" type="button" aria-label="Next 下一张">›</button>
+    </div>
+    <div class="lb-hint">← → 切换　·　Esc 关闭　·　点击图片可二次放大</div>
+  </div>
+</div>
+<script>
+// 数字滚动计数函数（保留定义，但不再自动调用——HTML已直接写正确号码，确保微信端一定显示正确）
+function animateCount(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1500;
+  const start = 0;
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easeProgress = 1 - Math.pow(1 - progress, 2);
+    const current = Math.floor(start + (target - start) * easeProgress);
+    el.textContent = current;
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target;
+    }
+  }
+  requestAnimationFrame(update);
+}
+// 滚动入场动画
+const observerOptions = {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+      // 修复4：移除紧急号码计数动画调用，HTML已直接写正确号码
+    }
+  });
+}, observerOptions);
+document.addEventListener('DOMContentLoaded', () => {
+  // 修复1：锚点点击兼容处理——微信X5下CSS smooth scroll会导致锚点失效，改用JS直接scrollTo
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        window.scrollTo(0, target.offsetTop - 10);
+      }
+    });
+  });
+
+  // 绑定通用入场动画
+  document.querySelectorAll('.section, .card, .toc-card, h1, .hero-cn, .lead-wrap, .scroll, .qa .q, .table-wrap, .emergency, .warn').forEach(el => {
+    el.classList.add('animate-in');
+    observer.observe(el);
+  });
+  // 监听紧急号码区域（保留observer，但不再触发计数动画）
+  const emergencySection = document.getElementById('emergency-section');
+  if (emergencySection) {
+    observer.observe(emergencySection);
+  }
+  // 入境中国公路流程动画（CSS已默认可见，此处动画作为增强，不触发也不影响显示）
+  const entrySection = document.getElementById('entry');
+  if (entrySection) {
+    const entryRoadLine = entrySection.querySelector('.entry-road-line');
+    const entryRoadSteps = entrySection.querySelectorAll('.entry-road-step');
+    const entryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entryRoadLine) {
+            entryRoadLine.classList.add('visible');
+          }
+          entryRoadSteps.forEach((step, index) => {
+            setTimeout(() => {
+              step.classList.add('visible');
+            }, index * 180);
+          });
+          entryObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.25,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    entryObserver.observe(entrySection);
+  }
+  // FAQ 折叠交互（修复3：配合CSS改用display切换，点击一定能展开）
+  const qs = document.querySelectorAll('.q');
+  qs.forEach(q => q.addEventListener('click', () => q.classList.toggle('open')));
+  
+  // 顶部进度条
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progress').style.width = p + '%';
+  });
+});
+</script>
+<script>
+/* =========================================================
+   图片灯箱：点击任意截图全屏放大
+   全部使用 ES5 + classList，避免微信 X5 内核兼容问题。
+   ========================================================= */
+(function () {
+  var items = [].slice.call(
+    document.querySelectorAll('.img-scroll img, .step .step-img, .hotel-img')
+  );
+  var lb = document.getElementById('lightbox');
+  if (!items.length || !lb) return;
+
+  var stage    = document.getElementById('lbStage');
+  var bigImg   = document.getElementById('lbImg');
+  var elCount  = document.getElementById('lbCount');
+  var elCap    = document.getElementById('lbCaption');
+  var btnPrev  = document.getElementById('lbPrev');
+  var btnNext  = document.getElementById('lbNext');
+  var btnZoom  = document.getElementById('lbZoom');
+  var btnClose = document.getElementById('lbClose');
+  var idx = 0;
+  var swipeGuard = false;
+
+  var FIT_MAX  = 1.6;   // 铺满视口时的最大放大倍数
+  var ZOOM_MAX = 2.5;   // 二次放大的上限；素材本身只有 390–600px 宽，再往上纯糊
+  var fitK = 1;
+
+  function scaleTo(k) {
+    var nw = bigImg.naturalWidth;
+    if (!nw) return;
+    bigImg.style.width = Math.round(nw * k) + 'px';
+    bigImg.style.height = 'auto';
+  }
+
+  function zoomK() {
+    return Math.min(fitK * 2, ZOOM_MAX);
+  }
+
+  /* 按可用空间等比放大，倍数上限 FIT_MAX——截图再往上放大就开始发虚了 */
+  function fit() {
+    var nw = bigImg.naturalWidth, nh = bigImg.naturalHeight;
+    if (!nw || !nh) return;
+    var sw = stage.clientWidth - 32;
+    var sh = stage.clientHeight - 8;
+    fitK = Math.min(sw / nw, sh / nh, FIT_MAX);
+    scaleTo(stage.classList.contains('zoomed') ? zoomK() : fitK);
+  }
+
+  function setZoom(on) {
+    if (on) {
+      stage.classList.add('zoomed');
+      scaleTo(zoomK());
+      // 放大后横向居中，而不是停在左边缘
+      stage.scrollLeft = Math.max(0, (stage.scrollWidth - stage.clientWidth) / 2);
+      stage.scrollTop = 0;
+    } else {
+      stage.classList.remove('zoomed');
+      scaleTo(fitK);
+      stage.scrollTop = 0;
+      stage.scrollLeft = 0;
+    }
+  }
+
+  function preload(i) {
+    if (i < 0 || i >= items.length) return;
+    var p = new Image();
+    p.src = items[i].getAttribute('src');
+  }
+
+  function show(i) {
+    if (i < 0) i = items.length - 1;
+    if (i >= items.length) i = 0;
+    idx = i;
+    var img = items[idx];
+    var alt = img.getAttribute('alt') || '';
+    bigImg.style.width = '';
+    bigImg.style.height = '';
+    bigImg.setAttribute('src', img.getAttribute('src'));
+    bigImg.setAttribute('alt', alt);
+    elCap.textContent = alt;
+    elCount.textContent = (idx + 1) + ' / ' + items.length;
+    stage.classList.remove('zoomed');
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
+    if (bigImg.complete) fit();   // 命中缓存时 load 事件不会再触发
+    preload(idx + 1);
+    preload(idx - 1);
+  }
+
+  bigImg.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+
+  function open(i) {
+    lb.classList.add('open');
+    document.body.classList.add('lb-lock');
+    show(i);   // 先展开再算尺寸，否则 stage 高度为 0
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.classList.remove('lb-lock');
+    setZoom(false);
+  }
+
+  // 缩略图：点击 / 键盘回车均可打开
+  items.forEach(function (img, i) {
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('title', 'Tap to enlarge 点击放大');
+    img.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      open(i);
+    });
+    img.addEventListener('keydown', function (e) {
+      var k = e.keyCode || 0;
+      if (e.key === 'Enter' || e.key === ' ' || k === 13 || k === 32) {
+        e.preventDefault();
+        open(i);
+      }
+    });
+  });
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', function () { show(idx - 1); });
+  btnNext.addEventListener('click', function () { show(idx + 1); });
+  btnZoom.addEventListener('click', function () {
+    setZoom(!stage.classList.contains('zoomed'));
+  });
+
+  // 点击大图 = 二次放大 / 还原；点击图片外的空白 = 关闭
+  bigImg.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setZoom(!stage.classList.contains('zoomed'));
+  });
+  stage.addEventListener('click', function () {
+    if (swipeGuard) return;
+    close();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    var k = e.keyCode || 0;
+    if (e.key === 'Escape' || k === 27) close();
+    else if (e.key === 'ArrowLeft' || k === 37) show(idx - 1);
+    else if (e.key === 'ArrowRight' || k === 39) show(idx + 1);
+  });
+
+  // 移动端左右滑动切换
+  var tx = 0, ty = 0;
+  stage.addEventListener('touchstart', function (e) {
+    if (!e.touches || e.touches.length !== 1) return;
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+  });
+  stage.addEventListener('touchend', function (e) {
+    if (stage.classList.contains('zoomed')) return; // 放大时交给原生滚动
+    var t = e.changedTouches && e.changedTouches[0];
+    if (!t) return;
+    var dx = t.clientX - tx;
+    var dy = t.clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      swipeGuard = true;
+      setTimeout(function () { swipeGuard = false; }, 400);
+      show(dx < 0 ? idx + 1 : idx - 1);
+    }
+  });
+
+  if (items.length < 2) {
+    btnPrev.setAttribute('disabled', 'disabled');
+    btnNext.setAttribute('disabled', 'disabled');
+  }
+})();
+</script>
+</body>
+</html>

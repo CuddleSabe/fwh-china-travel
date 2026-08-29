@@ -1,0 +1,10 @@
+# 抽取内联图片前的原始单文件版本（1.6MB，仅本地留存用）
+main.html.bak
+
+# macOS
+.DS_Store
+._*
+
+# 编辑器
+.vscode/
+.idea/
