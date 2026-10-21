@@ -283,7 +283,26 @@ td:first-child{font-weight:750;color:var(--ink);white-space:nowrap}
 .em strong{font-size:26px;display:block;font-variant-numeric:tabular-nums;letter-spacing:.02em;font-weight:850;color:#ffb877}
 .em span{font-size:11px;color:#c9cdd2;display:block;margin-top:5px}
 /* ===== 酒店卡片 ===== */
-.hotel-card{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.card.hotel-entry{
+  display:flex;flex-direction:column;gap:0;
+  padding:0;overflow:hidden;
+}
+.hotel-photos{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  background:var(--line-soft);
+}
+.hotel-thumb{
+  display:block;width:100%;aspect-ratio:3/2;object-fit:cover;
+  background:var(--soft);cursor:zoom-in;
+  transition:opacity .22s ease, filter .22s ease;
+}
+.hotel-thumb:hover{opacity:.92;filter:brightness(1.03)}
+.hotel-card{
+  display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
+  padding:18px 40px 18px 18px;text-decoration:none;color:inherit;
+}
+.card.hotel-entry > .hotel-card{border:0;box-shadow:none;background:transparent;border-radius:0}
+.card.hotel-entry > .hotel-card:hover{transform:none;box-shadow:none;border-color:transparent}
 .badge{
   display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.07em;
   padding:5px 10px;border-radius:999px;background:var(--orange-tint);color:var(--orange-dark);
@@ -786,8 +805,9 @@ body.lb-lock{overflow:hidden}
 
 /* 手机上徽标改为独占一行，避免把酒店名挤成两行 */
 @media(max-width:520px){
-  .hotel-card{flex-direction:column-reverse;align-items:flex-start;gap:10px}
+  .hotel-card{flex-direction:column-reverse;align-items:flex-start;gap:10px;padding:16px 16px 16px}
   .hotel-card .badge{align-self:flex-start}
+  .hotel-thumb{aspect-ratio:4/3}
 }
 
 /* =========================================================
@@ -1201,28 +1221,71 @@ body.lb-lock{overflow:hidden}
 <section class="section alt" id="hotels">
   <div class="kicker">12 · Shenzhen Hotels</div>
   <div class="cn-title">深圳适合外籍酒店推荐一览表</div>
+  <p class="img-hint" style="margin-bottom:14px">Tap a card to open the hotel booking page · 点击卡片进入酒店预订界面</p>
   <div class="grid">
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/C6O2OvP88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">1 · Sheraton Shenzhen Nanshan</div><div class="cn">深圳博林天瑞喜来登酒店</div><div class="cn">南山区留仙大道4088号 · 11 km · 驾车26min</div><p class="small">¥1,100–1,700 · English service ✓<br>Many Hong Kong and foreign guests; good hotel atmosphere and newer hardware.</p></div><span class="badge">FOREIGN GUESTS</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/ysBwp5S88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">2 · The St. Regis Shenzhen</div><div class="cn">深圳前海华侨城瑞吉酒店</div><div class="cn">宝安区兴业路1088号 · 13 km · 驾车39min</div><p class="small">¥2,000–2,500 · English service ✓<br>Classic luxury inspired by the 1904 St. Regis New York; skyline / bay views.</p></div><span class="badge">LUXURY</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/Cki8R3T88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">3 · Hotel Indigo Shenzhen Overseas Chinese Town</div><div class="cn">深圳南山威尼斯英迪格酒店</div><div class="cn">南山区华侨城深南大道9026号 · 18 km · 驾车31min</div><p class="small">¥1,100–3,000 · English service ✓<br>Distinctive Venice‑inspired design; near Window of the World, Happy Valley and shopping.</p></div><span class="badge">DESIGN</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/SLdo7sT88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">4 · Hilton Shenzhen Shekou Nanhai</div><div class="cn">深圳蛇口希尔顿南海酒店</div><div class="cn">南山区望海路1177号 · 20 km · 驾车1h</div><p class="small">¥1,100–1,300 · English service ✓<br>Located in Shekou with many foreign residents; international atmosphere and convenient surroundings.</p></div><span class="badge">INTERNATIONAL</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/Y5ZfHBV88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">5 · The Langham, Shenzhen</div><div class="cn">深圳东海朗廷酒店</div><div class="cn">福田区深南大道7888号 · 20 km · 驾车34min</div><p class="small">¥1,000–2,000 · English service ✓<br>Classic British elegance; next to a shopping center with many dining options.</p></div><span class="badge">BRITISH STYLE</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/UQrAfLX88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">6 · Andaz Shenzhen Bay</div><div class="cn">深圳湾安达仕酒店</div><div class="cn">南山区科苑南路2600号 · 20 km · 驾车37min</div><p class="small">¥2,700–5,000 · English service ✓<br>Retro Nanyang‑inspired design with strong design character and Shenzhen Bay views.</p></div><span class="badge">PREMIUM</span>
-    </a>
-    <a class="card hotel-card card-link" href="https://www.trip.com/w/xxRuT2Y88W2" target="_blank" rel="noopener noreferrer">
-      <div><div class="en">7 · The Ritz-Carlton Shenzhen, Futian</div><div class="cn">深圳星河丽思卡尔顿酒店</div><div class="cn">福田区福华三路116号 · 25 km · 驾车41min</div><p class="small">¥3,000–7,000 · English service ✓<br>Strong English service, in the Futian CBD and walkable to the Convention & Exhibition Center.</p></div><span class="badge">CBD</span>
-    </a>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-01a.png" alt="The Westin Shenzhen Nanshan · Pool">
+        <img class="hotel-thumb" src="images/hotels/hotel-01b.png" alt="The Westin Shenzhen Nanshan · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/shenzhen-hotel-detail-347272/the-westin-shenzhen-nanshan/" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">1 · The Westin Shenzhen Nanshan</div><div class="cn">深圳益田威斯汀酒店</div><div class="cn">南山区深南大道9028-2号 · 18 km · 驾车40min</div><p class="small">¥800/night · ≈USD 120 · English service ✓ · Passport check-in ✓<br>Westin series near OCT; Western breakfast and international cards accepted. Taxi to FWH recommended.</p></div><span class="badge">WESTIN</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-02a.png" alt="Le Méridien Shenzhen Qianhai · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-02b.png" alt="Le Méridien Shenzhen Qianhai · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/detail/?cityId=30&hotelId=116632641" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">2 · Le Méridien Shenzhen, Qianhai</div><div class="cn">深圳前海华侨城艾美酒店</div><div class="cn">宝安区兴业路1159号 · 13 km · 驾车45min</div><p class="small">¥1,050/night · ≈USD 160 · English service ✓ · Passport check-in ✓<br>Le Méridien series in Qianhai OCT; convenient for business stays. Taxi to FWH recommended.</p></div><span class="badge">LE MÉRIDIEN</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-03a.png" alt="Crowne Plaza Shenzhen Nanshan · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-03b.png" alt="Crowne Plaza Shenzhen Nanshan · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/shenzhen-hotel-detail-67685680/crowne-plaza-shenzhen-nanshan/" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">3 · Crowne Plaza Shenzhen Nanshan</div><div class="cn">深圳南山深铁皇冠假日酒店</div><div class="cn">南山区深南大道9819号 · 14 km · 驾车35min</div><p class="small">¥1,100/night · ≈USD 164 · English service ✓ · Passport check-in ✓<br>Crowne Plaza series with laundry and business facilities (paid). Taxi to FWH recommended.</p></div><span class="badge">CROWNE PLAZA</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-04a.png" alt="Sheraton Shenzhen Nanshan · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-04b.png" alt="Sheraton Shenzhen Nanshan · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/detail/?cityId=30&hotelId=29972589" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">4 · Sheraton Shenzhen Nanshan</div><div class="cn">深圳南山博林天瑞喜来登酒店</div><div class="cn">南山区留仙大道4088号 · 11 km · 驾车30min</div><p class="small">¥1,100/night · ≈USD 164 · English service ✓ · Passport check-in ✓<br>Closest listed option to FWH; some foreign colleagues already stay here. Taxi recommended.</p></div><span class="badge">COLLEAGUE PICK</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-05a.png" alt="JW Marriott Hotel Shenzhen Qianhai · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-05b.png" alt="JW Marriott Hotel Shenzhen Qianhai · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/detail/?cityId=30&hotelId=1647383" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">5 · JW Marriott Hotel Shenzhen Qianhai</div><div class="cn">深圳前海华侨城JW万豪酒店</div><div class="cn">宝安区前海宝兴路8号 · 13 km · 驾车45min</div><p class="small">¥1,200/night · ≈USD 180 · English service ✓ · Passport check-in ✓<br>JW Marriott series; popular among foreign colleagues. Laundry &amp; business facilities available (paid).</p></div><span class="badge">JW MARRIOTT</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-06a.png" alt="DoubleTree by Hilton Shenzhen Nanshan · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-06b.png" alt="DoubleTree by Hilton Shenzhen Nanshan · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/shenzhen-hotel-detail-66913472/doubletree-by-hilton-shenzhen-nanshan-hotel-residences/" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">6 · DoubleTree by Hilton Shenzhen Nanshan</div><div class="cn">深圳南山希尔顿逸林酒店及公寓</div><div class="cn">南山区前海路3109号 · 15 km · 驾车30min</div><p class="small">¥1,200/night · ≈USD 180 · English service ✓ · Passport check-in ✓<br>DoubleTree series with hotel &amp; residences; laundry service available (paid). Taxi to FWH recommended.</p></div><span class="badge">DOUBLETREE</span>
+      </a>
+    </div>
+    <div class="card hotel-entry">
+      <div class="hotel-photos">
+        <img class="hotel-thumb" src="images/hotels/hotel-07a.png" alt="Courtyard by Marriott Shenzhen Bay · Exterior">
+        <img class="hotel-thumb" src="images/hotels/hotel-07b.png" alt="Courtyard by Marriott Shenzhen Bay · Room">
+      </div>
+      <a class="hotel-card card-link" href="https://www.trip.com/hotels/detail/?cityId=30&hotelId=26576656" target="_blank" rel="noopener noreferrer">
+        <div><div class="en">7 · Courtyard by Marriott Shenzhen Bay</div><div class="cn">深圳湾万怡酒店</div><div class="cn">南山区科技南路16号 · 14 km · 驾车35min</div><p class="small">¥1,200/night · ≈USD 180 · English service ✓ · Passport check-in ✓<br>Courtyard series near Shenzhen Bay / tech area; solid business stay option. Taxi to FWH recommended.</p></div><span class="badge">COURTYARD</span>
+      </a>
+    </div>
   </div>
 </section>
 <footer class="footer">
@@ -1358,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================= */
 (function () {
   var items = [].slice.call(
-    document.querySelectorAll('.img-scroll img, .step .step-img, .hotel-img')
+    document.querySelectorAll('.img-scroll img, .step .step-img, .hotel-img, .hotel-thumb')
   );
   var lb = document.getElementById('lightbox');
   if (!items.length || !lb) return;
